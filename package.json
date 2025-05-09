@@ -1,6 +1,6 @@
 {
-    "name": "astal-shell",
-    "dependencies": {
-        "astal": "/usr/share/astal/gjs"
-    }
+  "name": "glace-shell",
+  "dependencies": {
+    "astal": "/usr/share/astal/gjs"
+  }
 }
