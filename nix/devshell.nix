@@ -15,4 +15,9 @@ in
       pkgs.watchexec
       glace-dev
     ];
+    shellHook = ''
+      if [ ! -d "$FLAKE_ROOT/@girs" ] || [ ! "$(ls -A "$FLAKE_ROOT/@girs" 2>/dev/null)" ]; then
+        ags types -d $FLAKE_ROOT
+      fi
+    '';
   }
