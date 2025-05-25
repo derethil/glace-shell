@@ -5,7 +5,7 @@
     "fzf": "^0.5.2"
   },
   "scripts": {
-    "postinstall": "ln -s /usr/share/astal/gjs ./node_modules/astal || true",
+    "postinstall": "ln -s ${ASTAL_GJS_PATH:-/usr/share/astal/gjs} ./node_modules/astal",
     "init": "ags types -d .; npm install",
     "dev": "ags run -d .",
     "dev:watch": "watchexec -r -w . -- ags run -d ."
