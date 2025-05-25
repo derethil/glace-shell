@@ -1,19 +1,22 @@
 # Glace Shell
 
+A custom shell interface built on [AGS](https://github.com/Aylur/ags).
+
 ## Development
 
-If you're on Nix:
+You can either use Nix (recommended) or manually install AGS
+and (optionally) [watchexec](https://github.com/watchexec/watchexec).
+
+Set up the environment:
 
 ```bash
-nix develop    # Enter the devshell 
-npm install    # Install NPM dependencies
-glace-dev      # Start glace-shell hot reload script
+nix develop # only if you're using Nix, skip if not
+npm init
 ```
 
-Otherwise, first install [AGS](https://github.com/aylur/ags), then run
+Then run the project:
 
 ```bash
-ags types -d ./.   # Generate GJS types
-npm install        # Install NPM dependencies
-ags run -d $(pwd)  # Start glace-shell (no hot reload)
+npm run dev # run normally
+npm run dev:watch # run with hot reload (requires watchexec)
 ```

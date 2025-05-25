@@ -4,7 +4,6 @@
   inputs = {
     nixpkgs.url = "github:nixos/nixpkgs?ref=nixos-unstable";
     flake-parts.url = "github:hercules-ci/flake-parts";
-    flake-root.url = "github:srid/flake-root";
     astal.url = "github:aylur/astal";
     ags = {
       url = "github:aylur/ags";
@@ -15,7 +14,6 @@
   outputs = inputs @ {flake-parts, ...}:
     flake-parts.lib.mkFlake {inherit inputs;} {
       systems = import ./nix/systems.nix;
-      imports = [inputs.flake-root.flakeModule];
       perSystem = {
         config,
         pkgs,
@@ -23,7 +21,7 @@
         ...
       }: {
         packages = import ./nix/packages/glace.nix {inherit pkgs system inputs config;};
-        devShells.default = import ./nix/devshell.nix {inherit pkgs system config inputs;};
+        devShells.default = import ./nix/devshell.nix {inherit pkgs system inputs;};
       };
     };
 }
