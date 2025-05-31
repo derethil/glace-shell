@@ -4,9 +4,12 @@
   inputs,
   config,
 }: let
+  package = builtins.fromJSON (builtins.readFile ../../package.json);
+  packageProd = builtins.removeAttrs package ["devDependencies"];
   npmDeps = pkgs.importNpmLock.buildNodeModules {
-    npmRoot = ../../.;
     inherit (pkgs) nodejs;
+    npmRoot = ../../.;
+    package = packageProd;
   };
 
   glaceSource = pkgs.runCommand "glace-source" {} ''

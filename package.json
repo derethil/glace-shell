@@ -4,10 +4,13 @@
   "dependencies": {
     "fzf": "^0.5.2"
   },
+  "devDependencies": {
+    "astal": "https://gitpkg.vercel.app/Aylur/astal/lang/gjs/src?main",
+    "typescript": "^5.7.3"
+  },
   "scripts": {
-    "dependencies": "ln -s ${ASTAL_GJS_PATH:-/usr/share/astal/gjs} ./node_modules/astal",
-    "init": "ags types -d .; npm install",
     "dev": "ags run -d .",
+    "dev:init": "ags types -d .; npm install",
     "dev:watch": "watchexec -r -w . -- ags run -d ."
   }
 }
