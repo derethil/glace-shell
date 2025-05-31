@@ -1,8 +1,31 @@
 import { App, Astal, Gtk, Gdk } from "astal/gtk3";
 import { Variable } from "astal";
 import { Fzf } from "fzf";
+import { scss } from "@/lib/theme";
 
 const time = Variable("").poll(1000, "date");
+
+void scss`
+  $fg-color: #{"@theme_fg_color"};
+  $bg-color: #{"@theme_bg_color"};
+
+  window.Bar {
+      background: transparent;
+      color: $fg-color;
+      font-weight: bold;
+
+      >centerbox {
+          background: $bg-color;
+          border-radius: 10px;
+          margin: 8px;
+      }
+
+      button {
+          border-radius: 8px;
+          margin: 2px;
+      }
+  }
+`;
 
 export function Bar(gdkmonitor: Gdk.Monitor) {
   const { TOP, LEFT, RIGHT } = Astal.WindowAnchor;
