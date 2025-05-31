@@ -4,7 +4,7 @@ import { Fzf } from "fzf";
 
 const time = Variable("").poll(1000, "date");
 
-export default function Bar(gdkmonitor: Gdk.Monitor) {
+export function Bar(gdkmonitor: Gdk.Monitor) {
   const { TOP, LEFT, RIGHT } = Astal.WindowAnchor;
 
   const fzf = new Fzf(["hello", "world"]);
