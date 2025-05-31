@@ -10,7 +10,7 @@
   },
   "scripts": {
     "dev": "ags run -d .",
-    "dev:init": "ags types -d .; npm install",
+    "dev:init": "if [ -n \"$ASTAL_GJS_PATH\" ]; then ags types -d .; fi; npm install",
     "dev:watch": "watchexec -r -w . -- ags run -d ."
   }
 }

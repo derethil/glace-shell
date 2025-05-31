@@ -11,7 +11,7 @@ Set up the environment:
 
 ```bash
 nix develop # only if you're using Nix, skip if not
-npm init
+npm run dev:init
 ```
 
 Then run the project:
