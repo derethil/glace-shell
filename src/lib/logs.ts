@@ -55,7 +55,7 @@ class Logger {
   }
 
   public fatal(message: string) {
-    this._log(message, LogLevel.FATAL).then(() => App.quit());
+    this._log(message, LogLevel.FATAL).then(() => App.quit(1));
   }
 
   // PRIVATE METHODS
