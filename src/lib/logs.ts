@@ -38,23 +38,23 @@ class Logger {
 
   // LOGGERS
 
-  public info(message: string) {
+  public info(message: string | unknown) {
     this._log(message, LogLevel.INFO);
   }
 
-  public debug(message: string) {
+  public debug(message: string | unknown) {
     this._log(message, LogLevel.DEBUG);
   }
 
-  public warn(message: string) {
+  public warn(message: string | unknown) {
     this._log(message, LogLevel.WARN);
   }
 
-  public error(message: string) {
+  public error(message: string | unknown) {
     this._log(message, LogLevel.ERROR);
   }
 
-  public fatal(message: string) {
+  public fatal(message: string | unknown) {
     this._log(message, LogLevel.FATAL).then(() => App.quit(1));
   }
 
@@ -71,22 +71,24 @@ class Logger {
     return level >= this._level;
   }
 
-  private async _log(message: string, level: LogLevel) {
+  private async _log(message: string | unknown, level: LogLevel) {
     if (!this.shouldLog(level)) return;
+
+    const m = message instanceof Error ? message.message : String(message);
 
     const levelName = LogLevel[level];
     const timestamp = new Date().toISOString();
     const { file, func } = await this.getLogSource();
 
     if (!this._colorize) {
-      print(`[${timestamp}] [${levelName}] [${file}:${func}] ${message}`);
+      print(`[${timestamp}] [${levelName}] [${file}:${func}] ${m}`);
     }
 
     let log = "";
     log += colorize(`[${timestamp}] `, Color.Cyan);
     log += colorize(`[${levelName}] `, this.logColor(level));
     log += colorize(`[${file}:${func}]`, Color.Blue);
-    print(`${log} ${message}`);
+    print(`${log} ${m}`);
   }
 
   private logColor(level: LogLevel): Color {
