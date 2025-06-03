@@ -1,4 +1,5 @@
 import { GLib, readFileAsync } from "astal";
+import { format } from "date-fns";
 import { Color, colorize } from "./colorize";
 import { App } from "astal/gtk3";
 
@@ -77,7 +78,7 @@ class Logger {
     const m = message instanceof Error ? message.message : String(message);
 
     const levelName = LogLevel[level];
-    const timestamp = new Date().toISOString();
+    const timestamp = format(new Date(), "yyyy-MM-dd HH:mm:ss");
     const { file, func } = await this.getLogSource();
 
     if (!this._colorize) {
