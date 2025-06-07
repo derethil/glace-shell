@@ -2,6 +2,7 @@ import { GLib, readFileAsync } from "astal";
 import { App } from "astal/gtk3";
 import { format } from "date-fns";
 import { Color, colorize } from "./colorize";
+import { registerHandler } from "./messageRouter";
 
 enum LogLevel {
   DEBUG = 0,
@@ -149,3 +150,18 @@ class Logger {
 }
 
 export const logger = new Logger({ level: LogLevel.INFO });
+
+registerHandler("setloglevel", (args: string[]) => {
+  if (args.length !== 1) {
+    return "usage: setloglevel <level>";
+  }
+
+  const level = LogLevel[args[0].toUpperCase() as keyof typeof LogLevel];
+
+  if (level === undefined) {
+    return "invalid log level. use one of DEBUG, INFO, WARN, ERROR, FATAL";
+  } else {
+    logger.setLogLevel(level);
+    return `log level set to ${LogLevel[level]}`;
+  }
+});
