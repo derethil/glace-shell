@@ -1,11 +1,11 @@
-import { App, Astal, Gtk, Gdk } from "astal/gtk3";
 import { Variable } from "astal";
+import { App, Astal, Gtk, Gdk } from "astal/gtk3";
 import { Fzf } from "fzf";
 import { scss } from "@/lib/theme";
 
 const time = Variable("").poll(1000, "date");
 
-void scss`
+scss`
   $fg-color: #{"@theme_fg_color"};
   $bg-color: #{"@theme_bg_color"};
 

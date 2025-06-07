@@ -1,7 +1,7 @@
 import { GLib, readFileAsync } from "astal";
+import { App } from "astal/gtk3";
 import { format } from "date-fns";
 import { Color, colorize } from "./colorize";
-import { App } from "astal/gtk3";
 
 enum LogLevel {
   DEBUG = 0,
@@ -39,24 +39,26 @@ class Logger {
 
   // LOGGERS
 
-  public info(message: string | unknown) {
-    this._log(message, LogLevel.INFO);
+  public info(message: unknown) {
+    this._log(message, LogLevel.INFO).catch(console.error);
   }
 
-  public debug(message: string | unknown) {
-    this._log(message, LogLevel.DEBUG);
+  public debug(message: unknown) {
+    this._log(message, LogLevel.DEBUG).catch(console.error);
   }
 
-  public warn(message: string | unknown) {
-    this._log(message, LogLevel.WARN);
+  public warn(message: unknown) {
+    this._log(message, LogLevel.WARN).catch(console.error);
   }
 
-  public error(message: string | unknown) {
-    this._log(message, LogLevel.ERROR);
+  public error(message: unknown) {
+    this._log(message, LogLevel.ERROR).catch(console.error);
   }
 
-  public fatal(message: string | unknown) {
-    this._log(message, LogLevel.FATAL).then(() => App.quit(1));
+  public fatal(message: unknown) {
+    this._log(message, LogLevel.FATAL)
+      .then(() => App.quit(1))
+      .catch(console.error);
   }
 
   // PRIVATE METHODS
@@ -72,7 +74,7 @@ class Logger {
     return level >= this._level;
   }
 
-  private async _log(message: string | unknown, level: LogLevel) {
+  private async _log(message: unknown, level: LogLevel) {
     if (!this.shouldLog(level)) return;
 
     const m = message instanceof Error ? message.message : String(message);
@@ -105,7 +107,7 @@ class Logger {
   private async getLogSource() {
     const trace = this.parseStackTrace();
     const source = await this.findSourceFile(trace.file, trace.line);
-    return { func: trace.func, file: source || trace.file };
+    return { func: trace.func, file: source ?? trace.file };
   }
 
   private parseStackTrace() {
@@ -115,7 +117,7 @@ class Logger {
     if (!lines || lines.length < 5) return unknown;
 
     const sourceLine = lines[4].trim();
-    const match = sourceLine.match(/([^@]+)@(.+?):(\d+):(\d+)/);
+    const match = /([^@]+)@(.+?):(\d+):(\d+)/.exec(sourceLine);
     if (!match) return unknown;
 
     return {
@@ -140,7 +142,7 @@ class Logger {
     const lines = await this.readBundledFile(file, line);
 
     for (let i = line - 1; i >= 0; i--) {
-      const fileComment = lines[i].match(/^\s*\/\/\s*(.*\.(ts|js|tsx|jsx))$/);
+      const fileComment = /^\s*\/\/\s*(.*\.(ts|js|tsx|jsx))$/.exec(lines[i]);
       if (fileComment) return fileComment[1];
     }
   }
