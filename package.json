@@ -1,17 +1,26 @@
 {
   "name": "glace-shell",
+  "type": "module",
   "version": "0.1.0",
   "dependencies": {
     "date-fns": "^4.1.0",
     "fzf": "^0.5.2"
   },
   "devDependencies": {
+    "@eslint/js": "^9.28.0",
     "astal": "https://gitpkg.vercel.app/Aylur/astal/lang/gjs/src?main",
-    "typescript": "^5.7.3"
+    "eslint": "^9.28.0",
+    "eslint-import-resolver-typescript": "^4.4.3",
+    "eslint-plugin-import": "^2.31.0",
+    "prettier": "^3.5.3",
+    "typescript": "^5.7.3",
+    "typescript-eslint": "^8.33.1"
   },
   "scripts": {
     "dev": "ags run -d .",
     "dev:init": "if [ -n \"$ASTAL_GJS_PATH\" ]; then ags types -d .; fi; npm install",
-    "dev:watch": "watchexec -r -w . -- ags run -d ."
+    "dev:watch": "watchexec -r -w . -- ags run -d .",
+    "lint": "eslint",
+    "lint:fix": "eslint --fix"
   }
 }
