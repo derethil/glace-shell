@@ -17,6 +17,7 @@
     "typescript-eslint": "^8.33.1"
   },
   "scripts": {
+    "build": "ags bundle app.ts glace-shell && sed -i '1i #!/usr/bin/env -S ags run' glace-shell && chmod +x glace-shell",
     "dev": "ags run -d .",
     "dev:init": "if [ -n \"$ASTAL_GJS_PATH\" ]; then ags types -d .; fi; npm install",
     "dev:watch": "watchexec -r -w . -- ags run -d .",

@@ -4,8 +4,8 @@ A custom shell interface built on [AGS](https://github.com/Aylur/ags).
 
 ## Development
 
-You can either use Nix (recommended) or manually install AGS
-and (optionally) [watchexec](https://github.com/watchexec/watchexec).
+It is recommended to use a Nix shell to pin dependencies, but you have the option
+of manually installing AGS and (optionally) [watchexec](https://github.com/watchexec/watchexec).
 
 Set up the environment:
 
@@ -20,3 +20,18 @@ Then run the project:
 npm run dev # run normally
 npm run dev:watch # run with hot reload (requires watchexec)
 ```
+
+## Bundling
+
+Again, you can use Nix to bundle and install Glace, or build
+the project manually using:
+
+```bash
+npm run dev:init
+npm run build
+./glace-shell # run the shell
+```
+
+Once you have the bundled script, place it in your `$PATH`
+and you can run it from anywhere as long as you have
+AGS installed.
