@@ -3,7 +3,6 @@
   "type": "module",
   "version": "0.1.0",
   "dependencies": {
-    "ags": "*",
     "date-fns": "^4.1.0",
     "fzf": "^0.5.2"
   },
@@ -19,9 +18,11 @@
   "scripts": {
     "build": "ags bundle app.ts glace-shell && sed -i '1i #!/usr/bin/env -S ags run' glace-shell && chmod +x glace-shell",
     "dev": "ags run -d .",
-    "dev:init": "if [ -n \"$ASTAL_GJS_PATH\" ]; then ags types -d .; fi; npm install",
+    "dev:init": "npm install && if [ -n \"$AGS_LIB_PATH\" ]; then ags types -d .; fi",
     "dev:watch": "watchexec -r -w . -- ags run -d .",
     "lint": "eslint",
-    "lint:fix": "eslint --fix"
+    "lint:fix": "eslint --fix",
+    "link-ags": "if [ -n \"$AGS_LIB_PATH\" ]; then rm -rf node_modules/ags && ln -sf \"$AGS_LIB_PATH\" node_modules/ags; else ags types --directory . --update; fi",
+    "postinstall": "npm run link-ags"
   }
 }

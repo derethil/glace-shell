@@ -4,7 +4,7 @@
   inputs,
 }:
 pkgs.mkShell {
-  ASTAL_GJS_PATH = "${inputs.astal}/lang/gjs";
+  AGS_LIB_PATH = "${inputs.ags.packages.${system}.gjsPackage}/share/ags/js";
   packages = [
     inputs.ags.packages.${system}.agsFull
     pkgs.watchexec
