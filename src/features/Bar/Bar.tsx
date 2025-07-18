@@ -1,5 +1,5 @@
 import { Variable } from "astal";
-import { App, Astal, Gtk, Gdk } from "astal/gtk3";
+import { App, Astal, Gtk, Gdk } from "astal/gtk4";
 import { Fzf } from "fzf";
 import { scss } from "@/lib/theme";
 
@@ -35,7 +35,8 @@ export function Bar(gdkmonitor: Gdk.Monitor) {
 
   return (
     <window
-      className="Bar"
+      visible
+      cssClasses={["Bar"]}
       gdkmonitor={gdkmonitor}
       exclusivity={Astal.Exclusivity.EXCLUSIVE}
       anchor={TOP | LEFT | RIGHT}

@@ -1,4 +1,5 @@
-import { App } from "astal/gtk3";
+import "gi://Gtk?version=4.0";
+import { App } from "astal/gtk4";
 import { Bar } from "@/features/Bar";
 import { logger } from "@/lib/logs";
 import { handleRequest } from "@/lib/messageRouter";
@@ -14,6 +15,7 @@ function render() {
 }
 
 App.start({
+  gtkTheme: "Adwaita",
   instanceName: "glace",
   requestHandler: handleRequest,
   main: () => {

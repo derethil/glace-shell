@@ -1,5 +1,5 @@
 import { GLib, readFileAsync } from "astal";
-import { App } from "astal/gtk3";
+import { App } from "astal/gtk4";
 import { format } from "date-fns";
 import { Color, colorize } from "./colorize";
 import { registerHandler } from "./messageRouter";

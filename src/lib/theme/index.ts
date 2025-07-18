@@ -1,5 +1,5 @@
 import { exec, idle, Variable, writeFileAsync } from "astal";
-import { App } from "astal/gtk3";
+import { App } from "astal/gtk4";
 import { bash } from "@/lib/util";
 import { logger } from "../logs";
 
