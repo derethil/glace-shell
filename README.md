@@ -29,9 +29,9 @@ the project manually using:
 ```bash
 npm run dev:init
 npm run build
-./glace-shell # run the shell
+./dist/glace-shell # run the shell
 ```
 
 Once you have the bundled script, place it in your `$PATH`
-and you can run it from anywhere as long as you have
-AGS installed.
+and you can run it anywhere, assuming
+AGS has been installed.
