@@ -3,7 +3,7 @@
   "type": "module",
   "version": "0.1.0",
   "dependencies": {
-    "astal": "https://gitpkg.vercel.app/Aylur/astal/lang/gjs/src?main",
+    "ags": "*",
     "date-fns": "^4.1.0",
     "fzf": "^0.5.2"
   },

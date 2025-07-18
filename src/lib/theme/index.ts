@@ -1,13 +1,16 @@
-import { exec, idle, Variable, writeFileAsync } from "astal";
-import { App } from "astal/gtk4";
+import { createState } from "ags";
+import { writeFileAsync } from "ags/file";
+import App from "ags/gtk4/app";
+import { exec } from "ags/process";
+import { idle } from "ags/time";
 import { bash } from "@/lib/util";
 import { logger } from "../logs";
 
-const stylesheets = Variable<string[]>([]);
+const [stylesheets, setStylesheets] = createState<string[]>([]);
 
 export function scss(sheet: TemplateStringsArray | { default: string }) {
   const style = "default" in sheet ? sheet.default : sheet;
-  stylesheets.set([...stylesheets.get(), style as string]);
+  setStylesheets([...stylesheets.get(), style as string]);
 }
 
 export async function theme() {

@@ -1,13 +1,11 @@
 import "gi://Gtk?version=4.0";
-import { App } from "astal/gtk4";
+import App from "ags/gtk4/app";
 import { Bar } from "@/features/Bar";
 import { logger } from "@/lib/logs";
-import { handleRequest } from "@/lib/messageRouter";
 import { theme } from "@/lib/theme";
 
-async function main() {
+async function init() {
   await theme();
-  render();
 }
 
 function render() {
@@ -17,8 +15,8 @@ function render() {
 App.start({
   gtkTheme: "Adwaita",
   instanceName: "glace",
-  requestHandler: handleRequest,
   main: () => {
-    main().catch((error: unknown) => logger.fatal(error));
+    init().catch((error: unknown) => logger.fatal(error));
+    render();
   },
 });

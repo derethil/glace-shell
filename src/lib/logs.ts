@@ -1,6 +1,7 @@
-import { GLib, readFileAsync } from "astal";
-import { App } from "astal/gtk4";
+import { readFileAsync } from "ags/file";
+import App from "ags/gtk4/app";
 import { format } from "date-fns";
+import GLib from "gi://GLib?version=2.0";
 import { Color, colorize } from "./colorize";
 import { registerHandler } from "./messageRouter";
 

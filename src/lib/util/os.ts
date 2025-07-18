@@ -1,4 +1,5 @@
-import { execAsync, GLib } from "astal";
+import { execAsync } from "ags/process";
+import GLib from "gi://GLib";
 
 export async function bash(
   strings: TemplateStringsArray | string,
