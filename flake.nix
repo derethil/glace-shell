@@ -17,7 +17,10 @@
 
   outputs = inputs @ {flake-parts, ...}:
     flake-parts.lib.mkFlake {inherit inputs;} ({moduleWithSystem, ...}: {
-      systems = import ./nix/systems.nix;
+      systems = [
+        "x86_64-linux"
+        "aarch64-linux" # not actively supported, but may work
+      ];
       flake = {
         flakeModules.default = moduleWithSystem (
           perSystem @ {config, ...}: {
