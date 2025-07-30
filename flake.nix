@@ -16,8 +16,16 @@
   };
 
   outputs = inputs @ {flake-parts, ...}:
-    flake-parts.lib.mkFlake {inherit inputs;} {
+    flake-parts.lib.mkFlake {inherit inputs;} ({moduleWithSystem, ...}: {
       systems = import ./nix/systems.nix;
+      flake = {
+        flakeModules.default = moduleWithSystem (
+          perSystem @ {config, ...}: {
+            imports = [./nix/modules/glace-shell.nix];
+            services.glace-shell.package = perSystem.config.packages.default;
+          }
+        );
+      };
       perSystem = {
         config,
         pkgs,
@@ -27,5 +35,5 @@
         packages = import ./nix/packages/glace.nix {inherit pkgs system inputs config;};
         devShells.default = import ./nix/devshell.nix {inherit pkgs system inputs;};
       };
-    };
+    });
 }
