@@ -34,6 +34,7 @@ in {
         Description = "A desktop shell built with AGS.";
         PartOf = ["graphical-session.target"];
         After = ["graphical-session.target"];
+        ConditionEnvironment = "WAYLAND_DISPLAY";
       };
       Install = {
         WantedBy = ["graphical-session.target"];
@@ -41,6 +42,8 @@ in {
       Service = lib.mkMerge [
         {
           ExecStart = "${cfg.package}/bin/glace-shell";
+          Restart = "on-failure";
+          OOMPolicy = "kill";
         }
         cfg.systemd.extraServiceConfig
       ];
